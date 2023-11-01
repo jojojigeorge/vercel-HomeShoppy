@@ -1,0 +1,43 @@
+<section>
+    <style>
+        .containerCenter{
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+    </style>
+    <div class="container">
+        <div class=" ">
+            <div class="col-md-12  ">
+                {{!-- <h5 class="text-center"> {{selectedProducts.category}} </h5> --}}
+                <div class=" containerCenter mt-5 ">
+                    {{#each selectedProducts}}
+                    <div class="card col-md-3 p-2 " style="width: 16rem;">
+                        <div class="my-auto ">
+                            <a class="removeTextdecoration" href="/view-product-details/{{this._id}}">
+                                <img class="card-img-top " src="/product-image/{{this._id}}.jpg" height='230px' alt="Card image cap">
+                                <div class=" mt-3 myblackcolor ">
+                                    <h5 class="text-center">{{ this.title }}</h5>
+                                    <h6 class="text-center">Rs {{this.price}}/-</h6>
+                                </div>
+                            </a>
+                            
+                                <div class="row p-2">
+                                    {{#if this.available}}
+                                        <button type="" class="btn btn-primary" onclick="addToCart('{{this._id}}')">Add to cart</button>
+                                    {{else}} 
+                                        <button type="" class="btn btn-danger" >Out of Stock</button>
+                                    {{/if}}
+                                </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+

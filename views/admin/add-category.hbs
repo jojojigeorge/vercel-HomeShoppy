@@ -1,0 +1,56 @@
+<style>
+    .admin-card {
+        flex-direction: column;
+        display: flex;
+
+    }
+</style>
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 ">
+                <div class="card shadow">
+                    <div class="card-body cartdiv ">
+                        <div class="container ">
+                            <div class="display-6  text-center p-3 mb-4">Add Category</div>
+
+                            <form class="admin-card" action="/admin/add-category" method="post" enctype="multipart/form-data">
+
+                                <label for="">Category name:</label>
+                                <input type="text" name="category"><br>
+
+                                <input type="hidden" name="adminId" value="{{admin._id}}">
+
+                                <label for="lname">Status:</label>
+                                <label class="radio-inline mx-4">
+                                    <input type="radio" name='availableStatus' value="true" checked>Available <br>
+                                    
+                                    <input type="radio" name='availableStatus' value="false">Out of Stock
+                                </label><br>
+
+                                <label for="lname">Description:</label>
+                                <textarea name="description" id="" cols="30" rows="5"></textarea><br>
+                                {{!-- <input type="text" name="description"><br> --}}
+
+                                <label for="lname">Meta keyword:</label>
+                                <input type="text" name="metakey"><br>
+
+                                <label for="lname">Trending:</label>
+                                <label class="radio-inline mx-4 ">
+                                    <input type="radio" name='trending' value="true" checked>Trending
+                                    <br>
+                                    <input type="radio" name='trending' value="false">Not Trending
+                                </label><br>
+
+                                <label for="lname">Image:</label>
+                                <input type="file" name="photo" "form-controls"><br>
+
+                                <button type="submit" class=" btn btn-success m-5">Add </button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

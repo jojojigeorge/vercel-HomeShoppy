@@ -1,0 +1,89 @@
+<style>
+    .admin-card {
+        flex-direction: column;
+        display: flex;
+
+    }
+</style>
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 ">
+                <div class="card shadow">
+                    <div class="card-body cartdiv ">
+                        <div class="container ">
+                            <div class="display-6  text-center p-3 mb-4">Add Product</div>
+
+                            <form class="container admin-card" action="/admin/edit-product/{{product._id}}"
+                                method="post" enctype="multipart/form-data">
+                                <label for="">Category name:</label>
+                                <select name="category" class=" p-2">
+                                    <option selected> {{product.category}} </option>
+                                    {{#each allCategory}}
+                                    <option value="{{this.category}}">{{this.category}}</option>
+                                    {{/each}}
+                                </select><br>
+                                {{!-- <input type="text" name="category" value="{{product.category}}"><br> --}}
+
+                                <label for="">Product name:</label>
+                                <input type="text" name="title" value="{{product.title}}"><br>
+
+                                <label for="lname">Slug:</label>
+                                <input type="text" name="slug" value="{{product.slug}}"><br>
+
+                                <label for="lname">Tag:</label>
+                                <input type="text" name="tag" value="{{product.tag}}"><br>
+
+                                <label for="lname">Small Description:</label>
+                                <input type="text" name="smalldescription" value="{{product.smalldescription}}"><br>
+
+                                <label for="lname">Stock:</label>
+                                <input type="text" name="stock" value="{{product.stock}}"><br>
+
+                                <label for="lname">Description:</label>
+                                <textarea name="description" id="" cols="30" rows="5">{{product.description}}</textarea><br>
+                                {{!-- <input type="text" name="description" value=""><br> --}}
+
+                                <label for="lname">Original price:</label>
+                                <input type="text" name="price" value="{{product.price}}"><br>
+
+                                <label for="lname">Selling price:</label>
+                                <input type="text" name="sellprice" value="{{product.sellprice}}"><br>
+
+                                <label for="">Available Status:</label>
+                                <label class="radio-inline mx-4 ">
+                                    <input type="radio" name='available' value="true" checked>Available
+                                    <br>
+                                    <input type="radio" name='available' value="false">Out of Stock
+                                </label>
+
+                                <label for="lname">Trending:</label>
+                                <label class="radio-inline mx-4 ">
+                                    <input type="radio" name='trending' value="true">Trending
+                                    <br>
+                                    <input type="radio" name='trending' value="false">Not Trending
+                                </label>
+
+                                <label for="lname">Meta keyword:</label>
+                                <input type="text" name="metakey" value="{{product.metakey}}"><br>
+
+                                <label for="">Image:</label>
+                                <img src="/product-image/{{product._id}}.jpg" alt="" id="output"
+                                    style="width: 100px"><br>
+                                <input type="file" name="photo" "form-controls" onchange="loadFile(event)"><br>
+
+                                <button type="submit" class=" btn btn-success m-auto">Submit Edit </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>

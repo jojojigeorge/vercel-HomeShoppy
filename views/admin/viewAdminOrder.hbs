@@ -1,0 +1,99 @@
+<div class="container mt-5">
+    <form action="" id="checkout-form">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card shadow ">
+                    <div class="card-body">
+                        <h6 class="font-weight-bold text-center">Basic Details</h6>
+                        <hr>
+                        {{!-- {{#each order}} --}}
+                        <div class="row ">
+                            <div class="col-md-6">
+                                <input type="text" disabled class="form-control" class="bg" name='fname' placeholder="{{details.deliveryDetails.firstName}}">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" disabled  class="form-control" class="bg" name='lname'  placeholder="{{details.deliveryDetails.lastName}}">
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <input type="text" disabled  class="form-control"  name='email'  placeholder="{{details.deliveryDetails.email}}">
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <input type="text" disabled  class="form-control"  name='phone'  placeholder="{{details.deliveryDetails.phone}}">
+                            </div>
+                            <div class="col-md-12 mt-2">
+                                <textarea disabled   class="form-control"  name='address'  placeholder="{{details.deliveryDetails.address}}"></textarea>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <input type="text" disabled  class="form-control" name='city'  placeholder="{{details.deliveryDetails.city}}">
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <input type="text" disabled  class="form-control"  name='state'  placeholder="{{details.deliveryDetails.state}}">
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <input type="text" disabled  class="form-control"  name='country'  placeholder="{{details.deliveryDetails.country}}">
+                            </div>
+                            <div class="col-md-6 mt-2 mb-2">
+                                <input type="text" disabled   class="form-control"  name='pincode'  placeholder="{{details.deliveryDetails.pin}}">
+                            </div>
+                            <br>
+                            <div class="col-md-12 mt-2 justify-content-center ">
+                                {{!-- <label >Payment status      :<span id="status_id">{{details.status}}</span></label> --}}
+                                <input type="text" disabled   class="form-control"  name='pincode'  placeholder="Payment Method      :     {{details.paymentMethod}}">
+                                {{!-- <input type="text" disabled   class="form-control"  name='pincode'  placeholder="Payment status         :    " <span id="carttotal">{{details.status}}</span>> --}}
+                                <input type="text" disabled   class="form-control"  name='pincode'  placeholder="Date of Order            :     {{details.date}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="card shadow">
+                    <div class="card-body mt-2">
+                        <h6 class="text-center font-weight-bold">Order Summary</h6>
+                        <hr>
+                        {{#if orderItems}}
+                            
+                            <table class="table table-bordereds table-stripeds">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                        <th>Qty</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    {{#each orderItems}}
+                                    <tr>
+                                        <td>
+                                            <img src="/product-image/{{this._id}}.jpg" height="70px" width="70px" alt="pimage">
+
+                                        </td>
+                                        <td><h6>{{this.title}}</h6></td>
+                                        <td><h6>Rs:{{this.price}}/-</h6></td>
+                                        <td>{{this.qtyOrder}}</td>
+
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                            {{!-- <hr>
+                            <div class="container">
+                                <h6 class="font-weight-bold">Grand Total
+                                    <span class="float-end font-weight-bold">RS:{{details.totalPrice}}/-</span>
+                                </h6>
+                                <hr>
+                            </div> --}}
+                            {{!-- <button class="mt-2 btn btn-primary  w-100"onclick="shipped('{{details._id}}')">Shipped </button> --}}
+                            <a href="/admin"class="mt-2 btn btn-success  w-100">Back </a>
+                        {{else}}   
+                            <h4>Your cart is empty</h4>
+                        {{/if}}
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

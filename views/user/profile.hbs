@@ -1,0 +1,33 @@
+<style>
+    .container{
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+<div class=" mt-3 ">
+        <div class="card container shadow-lg  " style="width: 25rem;">
+            <div>
+
+            <img class="card-img-top " src="/images/profile.png" height='300px'  style="border-radius: 50%" alt="Card image cap">
+            </div>
+            <div class="display-5 text-center mt-2 text-uppercase">{{user.name}}</div>    
+            <hr>
+            <div class="card-body ">
+                <form action="/signup" method="POST">
+                    <div class="text-center">
+                        <label for="name-reg" class="form-label ">Name :{{user.name}}</label>
+                    </div>
+                    <div class="text-center">
+                        <label for="email-reg" class="form-label">Email:{{user.email}}</label>
+                    </div>
+                        <div class="text-center">
+                            {{!-- <button type="submit" class="btn btn-success">Submit</button> --}}
+                            <a href="/"class="btn btn-success">Back</a>
+                        </div>
+                    
+                    
+                </form>
+            </div>
+        </div>
+    </div>

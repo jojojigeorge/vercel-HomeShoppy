@@ -1,0 +1,90 @@
+ <div class="row text-center ">
+    <div class=" col-md-5 ">
+        <div class="row container m-auto">
+            <table  class=" table " id="category_table">
+            <thead>
+                <tr>
+            <a class=" btn btn-success mt-4 mb-4 " href="admin/add-category">Add Category</a>
+
+                    <th scope="col">Image</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Status</th>
+                    {{!-- <th scope="col">Trending</th> --}}
+                    {{!-- <th scope="col">Description</th> --}}
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {{#each category}}
+                <tr>
+                    <td><img src="/category-image/{{this._id}}.jpg" style="width:50px;height:50px;"></td>
+                    <td>{{this.category}}</td>
+                    <td>{{this.availableStatus}}</td>
+                    {{!-- <td>{{this.trending}}</td> --}}
+                    {{!-- <td>{{this.description}}</td> --}}
+                    <td>
+                        <a class="btn btn-outline-primary" href="/admin/edit-category/{{this._id}}">Edit</a>
+                        <a class="btn btn-outline-danger" href="/admin/delete-category/{{this._id}}"onclick="return confirm('Are you want {{this.title}} to delete ?')">Delete</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+         
+        </table>
+        </div>
+       
+    </div>
+    <div class=" col-md-7 ">
+        
+        <div class="row container m-auto">
+            <a class=" btn btn-success mt-4 mb-4 " href="admin/add-product">Add Products</a>
+            <table class=" table  " id="product_table">
+            <thead>
+                <tr>
+                    {{!-- <th scope="col">No</th> --}}
+                    <th scope="col">Image</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Stocks</th>
+                    {{!-- <th scope="col">Description</th> --}}
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {{#each products}}
+                <tr>
+                    {{!-- <th scope="row">1</th> --}}
+                    <td><img src="/product-image/{{this._id}}.jpg" style="width:50px;height:50px;"></td>
+                    <td>{{this.title}}</td>
+                    <td>{{this.category}}</td>
+                    <td>{{this.stock}}</td>
+
+                    {{!-- <td>{{this.description}}</td> --}}
+                    <td>
+                        <a class="btn btn-outline-primary" href="/admin/edit-product/{{this._id}}">Edit</a>
+                        <a class="btn btn-outline-danger" href="/admin/delete-product/{{this._id}}"onclick="return confirm('Are you want {{this.title}} to delete ?')">Delete</a>
+                    </td>
+                </tr>
+                 {{/each}}
+            </tbody>
+           
+        </table>
+        </div>
+        
+    </div>
+ </div>
+ <script>
+    $(document).ready(function () {
+        $('#category_table').DataTable({
+            searching:true,
+            paging:false
+        });
+        $('#product_table').DataTable({
+            searching:true,
+            paging:false
+        });
+        
+    });
+</script>

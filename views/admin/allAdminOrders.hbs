@@ -1,0 +1,57 @@
+<section>
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <div class="card shadow">
+                        <div class="card-body cartdiv ">
+                            <div class="container col-md-11">
+                                <div class="display-6 text-center p-2 mb-2 ">Order Details</div>
+                            </div>
+                            <div class="container">
+                                <table class=" table ">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Order Id</th>
+                    <th scope="col">Payment Method</th>
+                    {{!-- <th scope="col">Total</th> --}}
+                    <th scope="col">Status</th>
+
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            {{#each order}}
+            <tbody>
+                <tr>
+                    <th scope="row">{{this.address.date}}</th>
+                    <td>{{this.address._id}}</td>
+                    <td>{{this.address.paymentMethod}}</td>
+                    {{!-- <td>{{this.address.totalPrice}}/-</td> --}}
+                    <td>{{this.address.status}}</td>
+                    <td>
+                        <a class="btn btn-primary" href="/admin/viewAdminOrder?orderId={{this.address._id}}&userId={{this.address.userId}}">View Details</a>
+                    </td>
+                </tr>
+
+            </tbody>
+            {{/each}}
+        </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section>
+    <div class="container ">
+        
+        
+    </div>
+</section>

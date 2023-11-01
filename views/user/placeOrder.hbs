@@ -1,0 +1,182 @@
+{{!-- <div class="py-2 topbar">
+    <div class="container">
+        <a class="" href="{% url 'home' %}">Home /</a>
+        <a class="" href="{% url 'checkout' %}">Checkout /</a>
+    </div>
+</div> --}}
+<div class="container mt-5">
+    <form action="" id="checkout-form">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h6 class="font-weight-bold text-center">Basic Details</h6>
+                        <hr>
+                        <div class="row ">
+                            <div class="col-md-6">
+                                <input type="text" required class="form-control" value="{{userprofile.order.fname}}"
+                                    name='fname' placeholder="Enter First Name">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" required class="form-control" value="{{userprofile.order.lname}}"
+                                    name='lname' placeholder="Enter Last Name">
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <input type="text" required class="form-control" value="{{userprofile.order.email}}"
+                                    name='email' placeholder="Enter Email">
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <input type="text" required class="form-control" value="{{userprofile.order.phone}}"
+                                    name='phone' placeholder="Enter Phone">
+                            </div>
+                            <div class="col-md-12 mt-2">
+                                <textarea required class="form-control" name='address'
+                                    placeholder="Enter Address">{{userprofile.order.address}}</textarea>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <input type="text" required class="form-control" value="{{userprofile.order.city}}"
+                                    name='city' placeholder="Enter City">
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <input type="text" required class="form-control" value="{{userprofile.order.state}}"
+                                    name='state' placeholder="Enter State">
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <input type="text" required class="form-control" value="{{userprofile.order.country}}"
+                                    name='country' placeholder="Enter Country">
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <input type="text" required class="form-control" value="{{userprofile.order.pincode}}"
+                                    name='pincode' placeholder="Enter Pincode">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="card shadow">
+                    <div class="card-body mt-2">
+                        <h6 class="text-center font-weight-bold">Order Summary</h6>
+                        <hr>
+                        {{#if cartItems}}
+
+                        <table class="table table-bordereds table-stripeds">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {{#each cartItems}}
+                                <tr>
+                                    <td>
+                                        <img src="/product-image/{{this.product._id}}.jpg" height="70px" width="70px"
+                                            alt="pimage">
+                                        {{!-- <img src="{{ item.product.product_image.url}}" class='me-3' 50px
+                                            width="50px"> --}}
+                                        <h6></h6>
+
+                                    </td>
+                                    <td>
+                                        <h6>{{this.product.title}}</h6>
+                                    </td>
+                                    <td>
+                                        <h6>Rs:{{this.product.price}}/-</h6>
+                                    </td>
+                                    <td>{{this.quantity}}</td>
+
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        <hr>
+                        <div class="container">
+                            <h6 class="font-weight-bold">Grand Total
+                                <span class="float-end font-weight-bold">RS:{{total}}/-</span>
+                            </h6>
+                            <hr>
+                            <input type="text" name="userId" value={{user._id}} hidden>
+                            <h6>Payment Method</h6>
+                            <label class="radio-inline ">
+                                <input type="radio" name='payment-method' value="COD" checked>COD
+                                <br>
+                                <input type="radio" name='payment-method' value="ONLINE">Online
+                            </label>
+                        </div>
+                        <button type="submit" class="mt-2 btn btn-success w-100">Place Order</button>
+                        {{!-- <div class="mt-2 paypalclass" id="paypal-button-container"></div> --}}
+                        {{else}}
+                        <h4>Your cart is empty</h4>
+                        {{/if}}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    $("#checkout-form").submit((e) => {
+        e.preventDefault()
+        $.ajax({
+            url: '/placeOrder',
+            method: 'post',
+            data: $('#checkout-form').serialize(),
+            success: (response => {
+                if (response.codSuccess) {
+                    alert("Order placed successfully")
+                    location.href = '/'
+                } else {
+                    Razorpayment(response)
+                }
+            })
+        })
+    })
+
+    function Razorpayment(order) {
+        var options = {
+            "key": "rzp_test_Wg7kegePFl1cq5", // Enter the Key ID generated from the Dashboard
+            "amount":order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "Shopping",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",   
+            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response) {
+                verfiyPayment(order,response)
+            },
+            "prefill": {
+                "name": "test user",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9000090000"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    }
+    function verfiyPayment(order,payment) {
+        $.ajax({
+            url:'/verfiy-payment',
+            data: {
+                payment,
+                order
+            },
+            method: 'post',
+            success:(response)=>{
+            alert('Payment successfull')
+            location.href=('/')
+        }
+        })
+    }
+</script>

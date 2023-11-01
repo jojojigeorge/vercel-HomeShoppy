@@ -1,0 +1,47 @@
+<section>
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <div class="card shadow">
+                        <div class="card-body cartdiv ">
+                            <div class="container col-md-11">
+                                <div class="h5 text-center p-3 mb-4 ">Order Details</div>
+                            </div>
+                            <div class="container">
+                                <table class=" table text-center ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Order Id</th>
+                                        <th scope="col">Payment Method</th>
+                                        {{!-- <th scope="col">No Of item</th> --}}
+                                        <th scope="col">Status</th>
+
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                {{#each order}}
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">{{this.date}}</th>
+                                        <td>{{this._id}}</td>
+                                        <td>{{this.paymentMethod}}</td>
+                                        {{!-- <td>{{total}}</td> --}}
+                                        <td>{{this.status}}</td>
+                                        <td>
+                                            <a class="btn btn-primary" href="/viewOrder/{{this._id}}">View Details</a>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                                {{/each}}
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

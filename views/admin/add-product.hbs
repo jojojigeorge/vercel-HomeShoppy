@@ -1,0 +1,83 @@
+<style>
+    .admin-card {
+        flex-direction: column;
+        display: flex;
+
+    }
+</style>
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 ">
+                <div class="card shadow">
+                    <div class="card-body cartdiv ">
+                        <div class="container ">
+                            <div class="display-6  text-center p-3 mb-4">Add Product</div>
+
+                            <form class="" action="/admin/add-product" method="post" enctype="multipart/form-data">
+                                <div class="admin-card">
+
+                                    <select class="form-select " name="category" id="selectValue">
+                                        <option selected> Select Category</option>
+                                        {{#each allCategory}}
+                                        <option value="{{this.category}}">{{this.category}}</option>
+                                        {{/each}}
+                                    </select><br>
+                                    <label for="">Product name:</label>
+                                    <input type="text" name="title"><br>
+
+                                    <input type="hidden" name="adminId" value="{{admin._id}}">
+
+
+                                    <label for="">Slug:</label>
+                                    <input type="text" name="slug"><br>
+
+                                    <label for="">Tag:</label>
+                                    <input type="text" name="tag"><br>
+
+                                    <label for="">Small Description:</label>
+                                    <input type="text" name="smalldescription"><br>
+
+                                    <label for="">Stock:</label>
+                                    <input type="number" name="stock"><br>
+
+                                    <label for="">Description:</label>
+                                    <textarea name="description" id="" cols="30" rows="5"></textarea><br>
+                                    {{!-- <textarea type="text" name="description"><br> --}}
+
+                                    <label for="">Original price:</label>
+                                    <input type="number" name="price"> <br>
+
+                                    <label for="">Selling price:</label>
+                                    <input type="number" name="sellprice"> <br>
+
+                                    <label for="">Available Status:</label>
+                                    <label class="radio-inline mx-4 ">
+                                        <input type="radio" name='available' value=true checked>Available
+                                        <br>
+                                        <input type="radio" name='available' value=false>Out of Stock
+                                    </label><br>
+
+                                    <label for="">Trending:</label>
+                                    <label class="radio-inline mx-4 ">
+                                        <input type="radio" name='trending' value="true" checked>Trending
+                                        <br>
+                                        <input type="radio" name='trending' value="false">Not Trending
+                                    </label><br>
+
+                                    <label for="">Meta keyword:</label>
+                                    <input type="text" name="metakey"><br>
+
+                                    <label for="">Image:</label>
+                                    <input type="file" name="photo" "form-controls"><br>
+
+                                    <button type="submit" class=" btn btn-success m-5">Add </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

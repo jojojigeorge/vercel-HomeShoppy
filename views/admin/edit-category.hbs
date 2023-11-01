@@ -1,0 +1,64 @@
+<style>
+    .admin-card {
+        flex-direction: column;
+        display: flex;
+
+    }
+</style>
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 ">
+                <div class="card shadow">
+                    <div class="card-body cartdiv ">
+                        <div class="container ">
+                            <div class="display-6  text-center p-3 mb-4">Edit Category</div>
+
+                            {{!-- <form class="admin-card" action="/admin/add-category" method="post"
+                                enctype="multipart/form-data"> --}}
+
+                                <form class="admin-card" action="/admin/edit-category/{{category._id}}" method="post"
+                                    enctype="multipart/form-data">
+                                    <label for="">Category Name:</label>
+                                    <input type="text" name="category" value="{{category.category}}"><br>
+
+                                    <label for="">Status:</label>
+                                    <label class="radio-inline mx-4">
+                                        <input type="radio" name='availableStatus' value="true" checked>Available
+                                        <br>
+                                        <input type="radio" name='availableStatus' value="false">Out of Stock
+                                    </label><br>
+
+                                    <label for="">Description:</label>
+                                    <textarea name="description" id="" cols="30"  rows="3">{{category.description}}</textarea><br>
+                                    {{!-- <input type="text" name="description" ><br> --}}
+
+                                    <label for="">Meta Key:</label>
+                                    <input type="text" name="metakey" value="{{category.metakey}}"> <br>
+
+                                    <label for="">Trending Status:</label>
+                                    <label class="radio-inline mx-4 ">
+                                        <input type="radio" name='trending' value="true">Trending
+                                        <br>
+                                        <input type="radio" name='trending' value="false">Not Trending
+                                    </label><br>
+
+                                    <label for="">Image:</label>
+                                    <img src="/category-image/{{category._id}}.jpg" class="mb-2" id="output"
+                                        style="width: 100px">
+                                    <input type="file" name="photo" "form-controls" onchange="loadFile(event)"><br>
+
+                                    <button type="submit" class=" btn btn-success m-auto">Submit Edit </button>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
