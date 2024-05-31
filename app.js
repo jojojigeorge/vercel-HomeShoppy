@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hbs = require('express-handlebars');
 var session = require('express-session')
+const MongoStore = require('connect-mongo');
 
 
 
@@ -38,7 +39,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-app.use(session({secret:'jojikey',resave :false,saveUninitialized: true,cookie:{maxAge:300000}}))
+// app.use(session({secret:'jojikey',resave :false,saveUninitialized: true,cookie:{maxAge:300000}}))
+app.use(
+  session({
+    secret: "jojikey",
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: "mongodb+srv://username:username@cluster101.0ktl0i6.mongodb.net/SessionStore?retryWrites=true&w=majority",
+    }),
+    cookie: {
+      maxAge: 100 * 60 * 1000, // 100 minutes in milliseconds
+    }
+  })
+);
 
 
 app.use(logger('dev'));
