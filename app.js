@@ -48,7 +48,7 @@ app.use(
     store: MongoStore.create({
         mongoUrl: "mongodb+srv://username:username@cluster101.0ktl0i6.mongodb.net/SessionStore?retryWrites=true&w=majority",
     }),
-    cookie: {
+    ttl: {
       maxAge: 100 * 60 * 1000, // 100 minutes in milliseconds
     }
   })
