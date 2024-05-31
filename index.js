@@ -12,6 +12,7 @@ var http = require("http");
 
 
 
+
 var express = require('express')
 // var favicon = require('serve-favicon')
 // var path = require('path')
@@ -21,25 +22,32 @@ var express = require('express')
 
 var port = normalizePort(process.env.PORT || "3000");
 
-db.connect((err) => {
-	//connect to database
-	if (err) console.log("connection error" + err);
-	else {
-		server.listen(port, () => {
-			// console.log("listening for requests");
-			console.log(`connection established at port ${port}`);
-		});
-	}
-});
+// db.connect((err) => {
+// 	//connect to database
+// 	if (err) console.log("connection error" + err);
+// 	else {
+// 		server.listen(port, () => {
+// 			// console.log("listening for requests");
+// 			console.log(`connection established at port ${port}`);
+// 		});
+// 	}
+// });
+var server = http.createServer(app);
 
-
+db.connect()
+.then(console.log)
+.catch(console.error)
+//   .finally(() => client.close())
+server.listen(port, () => {
+	// console.log("listening for requests");
+	console.log(`connection established at port ${port}`)
 app.set("port", port);
+})
 // console.log("environment variable:", process.env.MONGO_URL);
 /**
  * Create HTTP server.o
  */
 
-var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
